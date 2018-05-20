@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DNP1_assignment.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DNP1_assignment
 {
