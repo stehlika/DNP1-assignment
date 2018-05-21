@@ -10,7 +10,8 @@ namespace DNP1_assignment.Models
     {
         public Cinema Cinema { get; set; }
 
-        [Key] public string Name { get; set; }
+        [Key]
+        public string Name { get; set; }
 
         public List<Performance> Performances { get; set; }
 
