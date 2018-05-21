@@ -15,6 +15,6 @@ namespace DNP1_assignment.Models
 
         public List<Performance> Performances { get; set; }
 
-        public Seat[][] Seats { get; set; }
+        public Seat Seats { get; set; }
     }
 }

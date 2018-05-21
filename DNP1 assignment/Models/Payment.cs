@@ -7,5 +7,6 @@ namespace DNP1_assignment.Models
 {
     public class Payment
     {
+        public int Id { get; set; }
     }
 }

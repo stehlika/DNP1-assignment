@@ -7,13 +7,14 @@ namespace DNP1_assignment.Models
 {
     public class Performance
     {
-        public DateTime date { get; set; }
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
 
-        public Movie movie { get; set; }
+        public Movie Movie { get; set; }
 
-        public List<Ticket> tickets { get; set; }
+        public List<Ticket> Tickets { get; set; }
 
-        public Hall hall { get; set; }
+        public Hall Hall { get; set; }
 
         public string Language { get; set; }
 

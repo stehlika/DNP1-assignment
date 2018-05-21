@@ -24,8 +24,8 @@ namespace DNP1_assignment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            var connection = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = VIACinema; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
-            services.AddDbContext<VIACinemaContext>(options => options.UseSqlServer(connection));
+          //  var connection = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = VIACinema; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
+         //   services.AddDbContext<VIACinemaContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
