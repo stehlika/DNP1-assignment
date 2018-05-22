@@ -45,13 +45,9 @@ namespace DNP1assignment.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("SeatsId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CinemaId");
-
-                    b.HasIndex("SeatsId");
 
                     b.ToTable("Halls");
                 });
@@ -118,6 +114,8 @@ namespace DNP1assignment.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("HallId");
+
                     b.Property<int?>("PaymentId");
 
                     b.Property<int?>("PerformanceId");
@@ -127,6 +125,8 @@ namespace DNP1assignment.Migrations
                     b.Property<int>("YPosition");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HallId");
 
                     b.HasIndex("PaymentId");
 
@@ -162,10 +162,6 @@ namespace DNP1assignment.Migrations
                     b.HasOne("DNP1_assignment.Models.Cinema", "Cinema")
                         .WithMany("Halls")
                         .HasForeignKey("CinemaId");
-
-                    b.HasOne("DNP1_assignment.Models.Seat", "Seats")
-                        .WithMany()
-                        .HasForeignKey("SeatsId");
                 });
 
             modelBuilder.Entity("DNP1_assignment.Models.Performance", b =>
@@ -181,6 +177,10 @@ namespace DNP1assignment.Migrations
 
             modelBuilder.Entity("DNP1_assignment.Models.Seat", b =>
                 {
+                    b.HasOne("DNP1_assignment.Models.Hall")
+                        .WithMany("Seats")
+                        .HasForeignKey("HallId");
+
                     b.HasOne("DNP1_assignment.Models.Payment", "Payment")
                         .WithMany()
                         .HasForeignKey("PaymentId");
