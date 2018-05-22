@@ -9,22 +9,22 @@ using DNP1_assignment.Models;
 
 namespace DNP1_assignment.Controllers
 {
-    public class MoviesController : Controller
+    public class TicketsController : Controller
     {
         private readonly VIACinemaContext _context;
 
-        public MoviesController(VIACinemaContext context)
+        public TicketsController(VIACinemaContext context)
         {
             _context = context;
         }
 
-        // GET: Movies
+        // GET: Tickets
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Movies.ToListAsync());
+            return View(await _context.Tickets.ToListAsync());
         }
 
-        // GET: Movies/Details/5
+        // GET: Tickets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace DNP1_assignment.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
+            var ticket = await _context.Tickets
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (ticket == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(ticket);
         }
 
-        // GET: Movies/Create
+        // GET: Tickets/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Tickets/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,price,Discount")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
+                _context.Add(ticket);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(ticket);
         }
 
-        // GET: Movies/Edit/5
+        // GET: Tickets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace DNP1_assignment.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies.SingleOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            var ticket = await _context.Tickets.SingleOrDefaultAsync(m => m.Id == id);
+            if (ticket == null)
             {
                 return NotFound();
             }
-            return View(movie);
+            return View(ticket);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Tickets/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,price,Discount")] Ticket ticket)
         {
-            if (id != movie.Id)
+            if (id != ticket.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace DNP1_assignment.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
+                    _context.Update(ticket);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.Id))
+                    if (!TicketExists(ticket.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace DNP1_assignment.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(ticket);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Tickets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace DNP1_assignment.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
+            var ticket = await _context.Tickets
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (ticket == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(ticket);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Tickets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _context.Movies.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Movies.Remove(movie);
+            var ticket = await _context.Tickets.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Tickets.Remove(ticket);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
+        private bool TicketExists(int id)
         {
-            return _context.Movies.Any(e => e.Id == id);
+            return _context.Tickets.Any(e => e.Id == id);
         }
     }
 }

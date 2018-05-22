@@ -14,17 +14,18 @@ namespace DNP1_assignment.Models
         [MaxLength(50)] 
         public string Name { get; set; }
 
-        public DateTime releaseDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime ReleaseDate { get; set; }
 
-        public int length { get; set; }
+        public int Length { get; set; }
 
-        public int miminalAge { get; set; }
+        public int MinimalAge { get; set; }
 
-        public string description { get; set; }
+        public string Description { get; set; }
 
-        public string origin { get; set; }
+        public string Origin { get; set; }
 
-        public Performance performances { get; set; }
+        public ICollection<Performance> Performances { get; set; }
 
     }
 }

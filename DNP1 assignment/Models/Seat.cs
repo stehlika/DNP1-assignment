@@ -9,8 +9,8 @@ namespace DNP1_assignment.Models
 
         public Payment Payment { get; set; }
 
-        public int xPosition { get; set; }
+        public int XPosition { get; set; }
 
-        public int yPosition { get; set; }
+        public int YPosition { get; set; }
     }
 }

@@ -22,26 +22,34 @@ namespace DNP1assignment.Migrations
 
             modelBuilder.Entity("DNP1_assignment.Models.Cinema", b =>
                 {
-                    b.Property<string>("Name")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.HasKey("Name");
+                    b.Property<string>("Address");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Phone");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Cinemas");
                 });
 
             modelBuilder.Entity("DNP1_assignment.Models.Hall", b =>
                 {
-                    b.Property<string>("Name")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CinemaName");
+                    b.Property<int?>("CinemaId");
+
+                    b.Property<string>("Name");
 
                     b.Property<int?>("SeatsId");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CinemaName");
+                    b.HasIndex("CinemaId");
 
                     b.HasIndex("SeatsId");
 
@@ -53,18 +61,18 @@ namespace DNP1assignment.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Length");
+
+                    b.Property<int>("MinimalAge");
+
                     b.Property<string>("Name")
                         .HasMaxLength(50);
 
-                    b.Property<string>("description");
+                    b.Property<string>("Origin");
 
-                    b.Property<int>("length");
-
-                    b.Property<int>("miminalAge");
-
-                    b.Property<string>("origin");
-
-                    b.Property<DateTime>("releaseDate");
+                    b.Property<DateTime>("ReleaseDate");
 
                     b.HasKey("Id");
 
@@ -88,7 +96,7 @@ namespace DNP1assignment.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("HallName");
+                    b.Property<int?>("HallId");
 
                     b.Property<string>("Language");
 
@@ -98,11 +106,9 @@ namespace DNP1assignment.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HallName");
+                    b.HasIndex("HallId");
 
-                    b.HasIndex("MovieId")
-                        .IsUnique()
-                        .HasFilter("[MovieId] IS NOT NULL");
+                    b.HasIndex("MovieId");
 
                     b.ToTable("Performances");
                 });
@@ -116,9 +122,9 @@ namespace DNP1assignment.Migrations
 
                     b.Property<int?>("PerformanceId");
 
-                    b.Property<int>("xPosition");
+                    b.Property<int>("XPosition");
 
-                    b.Property<int>("yPosition");
+                    b.Property<int>("YPosition");
 
                     b.HasKey("Id");
 
@@ -138,9 +144,9 @@ namespace DNP1assignment.Migrations
 
                     b.Property<int?>("PerformanceId");
 
-                    b.Property<int?>("SeatId");
+                    b.Property<double>("Price");
 
-                    b.Property<double>("price");
+                    b.Property<int?>("SeatId");
 
                     b.HasKey("Id");
 
@@ -155,7 +161,7 @@ namespace DNP1assignment.Migrations
                 {
                     b.HasOne("DNP1_assignment.Models.Cinema", "Cinema")
                         .WithMany("Halls")
-                        .HasForeignKey("CinemaName");
+                        .HasForeignKey("CinemaId");
 
                     b.HasOne("DNP1_assignment.Models.Seat", "Seats")
                         .WithMany()
@@ -166,11 +172,11 @@ namespace DNP1assignment.Migrations
                 {
                     b.HasOne("DNP1_assignment.Models.Hall", "Hall")
                         .WithMany("Performances")
-                        .HasForeignKey("HallName");
+                        .HasForeignKey("HallId");
 
                     b.HasOne("DNP1_assignment.Models.Movie", "Movie")
-                        .WithOne("performances")
-                        .HasForeignKey("DNP1_assignment.Models.Performance", "MovieId");
+                        .WithMany("Performances")
+                        .HasForeignKey("MovieId");
                 });
 
             modelBuilder.Entity("DNP1_assignment.Models.Seat", b =>

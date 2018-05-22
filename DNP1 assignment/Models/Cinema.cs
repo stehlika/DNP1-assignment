@@ -9,8 +9,17 @@ namespace DNP1_assignment.Models
     public class Cinema
     {
   
-        [Key]public string Name { get; set; }
-        public List<Hall> Halls { get; set; }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        [MinLength(2)]
+        public string Address { get; set; }
+
+        [Phone]
+        public string Phone { get; set; }
+
+        public ICollection<Hall> Halls { get; set; }
 
     }
 }

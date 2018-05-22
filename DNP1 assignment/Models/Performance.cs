@@ -12,7 +12,7 @@ namespace DNP1_assignment.Models
 
         public Movie Movie { get; set; }
 
-        public List<Ticket> Tickets { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
 
         public Hall Hall { get; set; }
 

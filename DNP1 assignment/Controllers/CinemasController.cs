@@ -9,22 +9,22 @@ using DNP1_assignment.Models;
 
 namespace DNP1_assignment.Controllers
 {
-    public class MoviesController : Controller
+    public class CinemasController : Controller
     {
         private readonly VIACinemaContext _context;
 
-        public MoviesController(VIACinemaContext context)
+        public CinemasController(VIACinemaContext context)
         {
             _context = context;
         }
 
-        // GET: Movies
+        // GET: Cinemas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Movies.ToListAsync());
+            return View(await _context.Cinemas.ToListAsync());
         }
 
-        // GET: Movies/Details/5
+        // GET: Cinemas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace DNP1_assignment.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
+            var cinema = await _context.Cinemas
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (cinema == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(cinema);
         }
 
-        // GET: Movies/Create
+        // GET: Cinemas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Cinemas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,Phone")] Cinema cinema)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
+                _context.Add(cinema);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(cinema);
         }
 
-        // GET: Movies/Edit/5
+        // GET: Cinemas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace DNP1_assignment.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies.SingleOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            var cinema = await _context.Cinemas.SingleOrDefaultAsync(m => m.Id == id);
+            if (cinema == null)
             {
                 return NotFound();
             }
-            return View(movie);
+            return View(cinema);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Cinemas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Phone")] Cinema cinema)
         {
-            if (id != movie.Id)
+            if (id != cinema.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace DNP1_assignment.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
+                    _context.Update(cinema);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.Id))
+                    if (!CinemaExists(cinema.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace DNP1_assignment.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(cinema);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Cinemas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace DNP1_assignment.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
+            var cinema = await _context.Cinemas
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (cinema == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(cinema);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Cinemas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _context.Movies.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Movies.Remove(movie);
+            var cinema = await _context.Cinemas.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Cinemas.Remove(cinema);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
+        private bool CinemaExists(int id)
         {
-            return _context.Movies.Any(e => e.Id == id);
+            return _context.Cinemas.Any(e => e.Id == id);
         }
     }
 }

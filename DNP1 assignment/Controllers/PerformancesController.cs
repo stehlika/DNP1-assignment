@@ -9,22 +9,22 @@ using DNP1_assignment.Models;
 
 namespace DNP1_assignment.Controllers
 {
-    public class MoviesController : Controller
+    public class PerformancesController : Controller
     {
         private readonly VIACinemaContext _context;
 
-        public MoviesController(VIACinemaContext context)
+        public PerformancesController(VIACinemaContext context)
         {
             _context = context;
         }
 
-        // GET: Movies
+        // GET: Performances
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Movies.ToListAsync());
+            return View(await _context.Performances.ToListAsync());
         }
 
-        // GET: Movies/Details/5
+        // GET: Performances/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace DNP1_assignment.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
+            var performance = await _context.Performances
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (performance == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(performance);
         }
 
-        // GET: Movies/Create
+        // GET: Performances/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Performances/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Date,Language,Subtitles")] Performance performance)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
+                _context.Add(performance);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(performance);
         }
 
-        // GET: Movies/Edit/5
+        // GET: Performances/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace DNP1_assignment.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies.SingleOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            var performance = await _context.Performances.SingleOrDefaultAsync(m => m.Id == id);
+            if (performance == null)
             {
                 return NotFound();
             }
-            return View(movie);
+            return View(performance);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Performances/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Language,Subtitles")] Performance performance)
         {
-            if (id != movie.Id)
+            if (id != performance.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace DNP1_assignment.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
+                    _context.Update(performance);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.Id))
+                    if (!PerformanceExists(performance.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace DNP1_assignment.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(performance);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Performances/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace DNP1_assignment.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
+            var performance = await _context.Performances
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (performance == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(performance);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Performances/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _context.Movies.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Movies.Remove(movie);
+            var performance = await _context.Performances.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Performances.Remove(performance);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
+        private bool PerformanceExists(int id)
         {
-            return _context.Movies.Any(e => e.Id == id);
+            return _context.Performances.Any(e => e.Id == id);
         }
     }
 }
