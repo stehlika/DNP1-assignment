@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DNP1-assignment", "DNP1 assignment\DNP1-assignment.csproj", "{A9E21171-2F48-4D46-9E80-81D886042B5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService", "PaymentService\PaymentService.csproj", "{B936AD81-6CC4-488F-A41E-710F4F47F7B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A9E21171-2F48-4D46-9E80-81D886042B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9E21171-2F48-4D46-9E80-81D886042B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9E21171-2F48-4D46-9E80-81D886042B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B936AD81-6CC4-488F-A41E-710F4F47F7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B936AD81-6CC4-488F-A41E-710F4F47F7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B936AD81-6CC4-488F-A41E-710F4F47F7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B936AD81-6CC4-488F-A41E-710F4F47F7B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
