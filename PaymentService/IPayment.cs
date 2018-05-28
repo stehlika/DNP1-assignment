@@ -8,24 +8,20 @@ using System.Text;
 
 namespace PaymentService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-    public interface IService1
+    public interface IPayment
     {
         [OperationContract]
         bool ValidateCard(Card card);
-
-        // TODO: Add your service operations here
+        bool ValidateCardAsync(Card card);
     }
 
-
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
     public class Card
     {
-        [DataMember(IsRequired =true)]
+        [DataMember(IsRequired = true)]
         public string CardNumber { get; set; }
-        [DataMember(IsRequired =true)]
+        [DataMember(IsRequired = true)]
         public int CardExpirationMonth { get; set; }
         [DataMember(IsRequired = true)]
         public int CardExpirationYear { get; set; }

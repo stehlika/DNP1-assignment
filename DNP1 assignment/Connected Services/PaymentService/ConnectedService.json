@@ -5,8 +5,8 @@
     "Uri": "https://go.microsoft.com/fwlink/?linkid=858517"
   },
   "ExtendedData": {
-    "Uri": "http://localhost:64463/Service1.svc",
-    "Namespace": "ServiceReference1",
+    "Uri": "http://localhost:64463/Payment.svc",
+    "Namespace": "PaymentService",
     "SelectedAccessLevelForGeneratedClass": "Public",
     "GenerateMessageContract": false,
     "ReuseTypesinReferencedAssemblies": true,
@@ -21,7 +21,7 @@
     },
     "CheckedReferencedAssemblies": [],
     "InstanceId": null,
-    "Name": "ServiceReference1",
+    "Name": "PaymentService",
     "Metadata": {}
   }
 }
