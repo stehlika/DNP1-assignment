@@ -13,28 +13,24 @@ namespace MovieService
     public interface IMovie
     {
         [OperationContract]
-        string GetMovie(string movieName);
-        Task<string> GetMovieAsync(string movieName); 
+        MovieServiceModel GetMovie(string movieName);
+        Task<MovieServiceModel> GetMovieAsync(string movieName); 
     }
 
     [DataContract]
-    public class CompositeType
+    public class MovieServiceModel
     {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
         [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
+        public string title { get; set; }
         [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        public string release_date { get; set; }
+        [DataMember]
+        public bool adult { get; set; }
+        [DataMember]
+        public string overview { get; set; }
+        [DataMember]
+        public string original_language { get; set; }
+        [DataMember]
+        public string poster_path { get; set; }
     }
 }
