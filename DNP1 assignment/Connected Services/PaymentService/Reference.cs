@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceReference1
+namespace PaymentService
 {
     using System.Runtime.Serialization;
     
@@ -95,22 +95,22 @@ namespace ServiceReference1
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
-    public interface IService1
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PaymentService.IPayment")]
+    public interface IPayment
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ValidateCard", ReplyAction="http://tempuri.org/IService1/ValidateCardResponse")]
-        System.Threading.Tasks.Task<bool> ValidateCardAsync(ServiceReference1.Card card);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPayment/ValidateCard", ReplyAction="http://tempuri.org/IPayment/ValidateCardResponse")]
+        System.Threading.Tasks.Task<bool> ValidateCardAsync(PaymentService.Card card);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    public interface IService1Channel : ServiceReference1.IService1, System.ServiceModel.IClientChannel
+    public interface IPaymentChannel : PaymentService.IPayment, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<ServiceReference1.IService1>, ServiceReference1.IService1
+    public partial class PaymentClient : System.ServiceModel.ClientBase<PaymentService.IPayment>, PaymentService.IPayment
     {
         
     /// <summary>
@@ -120,40 +120,40 @@ namespace ServiceReference1
     /// <param name="clientCredentials">The client credentials</param>
     static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public Service1Client() : 
-                base(Service1Client.GetDefaultBinding(), Service1Client.GetDefaultEndpointAddress())
+        public PaymentClient() : 
+                base(PaymentClient.GetDefaultBinding(), PaymentClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IService1.ToString();
+            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IPayment.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Service1Client(EndpointConfiguration endpointConfiguration) : 
-                base(Service1Client.GetBindingForEndpoint(endpointConfiguration), Service1Client.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public Service1Client(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(Service1Client.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public PaymentClient(EndpointConfiguration endpointConfiguration) : 
+                base(PaymentClient.GetBindingForEndpoint(endpointConfiguration), PaymentClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Service1Client(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(Service1Client.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public PaymentClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(PaymentClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Service1Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public PaymentClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(PaymentClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public PaymentClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
-        public System.Threading.Tasks.Task<bool> ValidateCardAsync(ServiceReference1.Card card)
+        public System.Threading.Tasks.Task<bool> ValidateCardAsync(PaymentService.Card card)
         {
             return base.Channel.ValidateCardAsync(card);
         }
@@ -170,7 +170,7 @@ namespace ServiceReference1
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IService1))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IPayment))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -184,27 +184,27 @@ namespace ServiceReference1
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IService1))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IPayment))
             {
-                return new System.ServiceModel.EndpointAddress("http://localhost:64463/Service1.svc");
+                return new System.ServiceModel.EndpointAddress("http://localhost:64463/Payment.svc");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return Service1Client.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IService1);
+            return PaymentClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IPayment);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return Service1Client.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IService1);
+            return PaymentClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IPayment);
         }
         
         public enum EndpointConfiguration
         {
             
-            BasicHttpBinding_IService1,
+            BasicHttpBinding_IPayment,
         }
     }
 }
