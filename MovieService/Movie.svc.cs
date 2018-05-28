@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MovieService
 {
@@ -14,43 +15,41 @@ namespace MovieService
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public string GetMovie(string movieName)
+        public MovieServiceModel GetMovie(string movieName)
         {
-            return "ahoj";
+            Task<MovieServiceModel> movie = GetMovieAsync(movieName);
+
+            return movie.Result;
         }
 
 
-        public async Task<string> GetMovieAsync(string movieName)
+        public async Task<MovieServiceModel> GetMovieAsync(string movieName)
         {
-            var stringResult = "";
+            MovieServiceModel movie = new MovieServiceModel();
             try
             {
-                client.BaseAddress = new Uri("https://api.themoviedb.org/3");
-                HttpResponseMessage response = await client.GetAsync($"/search/movie?api_key=b97edb3572a6a9f660d0b90dc10453b6&query={movieName}");
+                HttpResponseMessage response = await client.GetAsync($"https://api.themoviedb.org/3/search/movie?api_key=b97edb3572a6a9f660d0b90dc10453b6&query={movieName}");
                 response.EnsureSuccessStatusCode();
 
-                stringResult = await response.Content.ReadAsStringAsync();
-                //var rawWeather = JsonConvert.DeserializeObject<OpenWeatherResponse>(stringResult);
+                var stringResult = await response.Content.ReadAsStringAsync();
+
+                RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(stringResult);
+
+                movie = rootObject.results.First();
             }
             catch (ArgumentNullException)
             {
-
+               
             }
 
-            return stringResult;
+            return movie;
         }
+    }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
+
+    public class RootObject
+    {
+        public int total_results { get; set; }
+        public ICollection<MovieServiceModel> results { get; set; }
     }
 }
