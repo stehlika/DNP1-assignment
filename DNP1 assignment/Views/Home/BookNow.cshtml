@@ -1,0 +1,94 @@
+﻿<!--model DNP1_assignment.Models.Movie-->
+<DNP1_assignment.Models.Seat>
+
+    @{
+        ViewData["Title"] = "BookNow";
+        Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    }
+    @functions{
+
+        int x = 0;
+        int y = 0;
+        int[] GetMaxXY()
+        {
+            foreach (var item in Model)
+            {
+                if (x < item.XPosition)
+                {
+                    x = item.XPosition;
+                }
+                if (y < item.YPosition)
+                {
+                    y = item.YPosition;
+                }
+            }
+            int[] array = new int[2];
+            array[0] = 10;
+            array[1] = 10;
+            return array;
+        }
+        void FillSeats(Seat[,] seats)
+        {
+
+            /*foreach(var item in Model)
+            {
+                seats[item.Xposition, item.Yposition] = item;
+            }*/
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Seat tempSeat = new Seat();
+                    tempSeat.XPosition = i;
+                    tempSeat.YPosition = j;
+                    //tempSeat.Payment = new Payment();
+                    seats[i, j] = tempSeat;
+                }
+            }
+
+        }
+
+
+    }
+    @{
+        <h1>@GetMaxXY()[0], @GetMaxXY()[1]</h1>
+        Seat[,] seats = new Seat[GetMaxXY()[0], GetMaxXY()[1]];
+        FillSeats(seats);
+    }
+    
+    <h4><button type="button"><a asp-action="Index">Back to List</a>
+        </button><button type="button">Book now</button></h4>
+    <h1 align="center">Select your booking for available seats</h1>
+    <table class="table">
+        <tbody>
+            @for (int i = 0; i < GetMaxXY()[1]; i++)
+            {
+
+                <tr>
+                    @for (int j = 0; j < GetMaxXY()[0]; j++)
+                    {
+                        if (seats[x, y].Payment == null)
+                        {
+                            <td>
+                                <input type="checkbox" name="@i/@j" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <input type="checkbox" name="@i/@j" disabled="disabled" />
+                            </td>
+
+                        }
+
+                    }
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <h1 align="center">Screen</h1>
+
+
+

@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace DNP1_assignment.Models
 {
     public class Seat
@@ -12,5 +14,6 @@ namespace DNP1_assignment.Models
         public int XPosition { get; set; }
 
         public int YPosition { get; set; }
+
     }
 }
