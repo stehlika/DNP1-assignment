@@ -5,11 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DNP1_assignment.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DNP1_assignment.Controllers
 {
     [Route("admin/[controller]/[action]")]
-    public class HomeControllerAdmin : Controller
+    [Authorize]
+    public class HomeAdminController : Controller
     {
         public IActionResult Index()
         {

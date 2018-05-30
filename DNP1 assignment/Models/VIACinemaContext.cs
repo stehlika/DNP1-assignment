@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DNP1_assignment.Models
 {
-    public class VIACinemaContext : DbContext
+    public class VIACinemaContext : IdentityDbContext<ApplicationUser>
     {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

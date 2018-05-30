@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DNP1_assignment.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DNP1_assignment.Controllers
 {
+    [Authorize]
+
     [Route("admin/[controller]/[action]")]
     public class PerformancesController : Controller
     {
