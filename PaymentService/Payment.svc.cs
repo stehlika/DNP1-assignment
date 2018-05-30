@@ -27,7 +27,7 @@ namespace PaymentService
                     return false;
                 }
 
-                if (card.CardExpirationYear < DateTime.Now.Year)
+                if (card.CardExpirationYear < DateTime.Now.Year || card.CardExpirationMonth > 12)
                 {
                     return false;
                 }

@@ -21,6 +21,8 @@ namespace MovieService
     public class MovieServiceModel
     {
         [DataMember]
+        public int id { get; set; }
+        [DataMember]
         public string title { get; set; }
         [DataMember]
         public string release_date { get; set; }
@@ -31,6 +33,8 @@ namespace MovieService
         [DataMember]
         public string original_language { get; set; }
         [DataMember]
-        public string poster_path { get; set; }
+        public string poster_path { get { return this.url; } set { this.url = $"https://image.tmdb.org/t/p/w500{value}"; } }
+
+        private string url;
     }
 }

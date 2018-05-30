@@ -8,24 +8,31 @@ namespace DNP1_assignment.Models
 {
     public class Movie
     {
+        public Movie(MovieService.MovieServiceModel serviceModel)
+        {
+            Id = serviceModel.id;
+            Title = serviceModel.title;
+            Release_date = serviceModel.release_date;
+            Adult = serviceModel.adult;
+            Description = serviceModel.overview;
+            Origin = serviceModel.original_language;
+            Poster_path = serviceModel.poster_path;
+        }
+
         public int Id { get; set; }
 
-        [MinLength(2)]
-        [MaxLength(50)] 
-        public string Name { get; set; }
+        public string Title { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
+        public string Release_date { get; set; }
 
-        public int Length { get; set; }
-
-        public int MinimalAge { get; set; }
+        public bool Adult { get; set; }
 
         public string Description { get; set; }
 
         public string Origin { get; set; }
 
-        public ICollection<Performance> Performances { get; set; }
+        public string Poster_path { get; set; }
 
+        public ICollection<Performance> Performances { get; set; }
     }
 }

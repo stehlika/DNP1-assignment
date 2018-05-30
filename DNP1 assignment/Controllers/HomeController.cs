@@ -24,7 +24,7 @@ namespace DNP1_assignment.Controllers
                 Cvs = "323"
             });
 
-            //tuto je vysledok z toho
+            //this is result
             bool correctPayment = isValid.Result;
             //ServiceReference1.Service1Client paymentService = new ServiceReference1.Service1Client();
 
