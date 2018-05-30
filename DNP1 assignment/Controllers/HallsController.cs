@@ -60,18 +60,6 @@ namespace DNP1_assignment.Controllers
         {
             if (ModelState.IsValid)
             {
-                ICollection<Seat> seats = new List<Seat>();
-                for (int i = 0; i < 10; i++)
-                {
-                    for (int j = 0; j < 10; j++)
-                    {
-                        Seat seat = new Seat();
-                        seat.XPosition = i;
-                        seat.YPosition = j;
-                        seats.Add(seat);
-                    }
-                }
-                hall.Seats = seats;
                 _context.Add(hall);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

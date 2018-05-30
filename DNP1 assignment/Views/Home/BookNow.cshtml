@@ -34,7 +34,7 @@
 
             foreach(var item in Model)
             {
-                seats[item.Xposition, item.Yposition] = item;
+                seats[item.XPosition, item.YPosition] = (Seat) item;
             }
             /*for (int i = 0; i < 10; i++)
             {
@@ -54,7 +54,8 @@
     }
     @{
         <h1>@GetMaxXY()[0], @GetMaxXY()[1]</h1>
-        Seat[,] seats = new Seat[GetMaxXY()[0], GetMaxXY()[1]];
+        Seat[,] seats = new Seat[(GetMaxXY()[0])+1, (GetMaxXY()[1])+1];
+        //Seat[,] seats = new Seat[5, 5];
         FillSeats(seats);
     }
 
@@ -65,13 +66,13 @@
     <form method="post" asp-action="PaymentForm">
         <table class="table">
             <tbody>
-                @for (int i = 0; i < GetMaxXY()[1]; i++)
+                @for (int i = 0; i < GetMaxXY()[1]+1; i++)
                 {
 
                     <tr>
-                        @for (int j = 0; j < GetMaxXY()[0]; j++)
-                        {
-                            if (seats[x, y].Payment == null)
+                        @for (int j = 0; j < GetMaxXY()[0]+1; j++)
+                            {
+                            if (seats[i, j].Payment == null)
                             {
                                 <td>
                                     <input type="checkbox" name="checkedItems" value="@i/@j" />
