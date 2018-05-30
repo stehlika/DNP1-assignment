@@ -59,6 +59,7 @@ namespace DNP1_assignment.Controllers
             if (ModelState.IsValid)
             {
                 performance.Hall = _context.Halls.Where(S => S.Name.Equals("halltest")).FirstOrDefault();
+                performance.Movie= _context.Movies.Where(S => S.Title.Equals("batman")).FirstOrDefault();
                 _context.Add(performance);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

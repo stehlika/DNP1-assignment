@@ -72,9 +72,6 @@ namespace DNP1_assignment.Controllers
         {
             if (ModelState.IsValid)
             {
-                Performance performance = _context.Performances.Where
-                    (S => S.Hall.Equals("halltest")).FirstOrDefault();
-                movie.Performances.Add(performance);
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
