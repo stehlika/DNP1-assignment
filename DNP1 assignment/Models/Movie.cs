@@ -8,6 +8,10 @@ namespace DNP1_assignment.Models
 {
     public class Movie
     {
+        public Movie()
+        {
+        }
+
         public Movie(MovieService.MovieServiceModel serviceModel)
         {
             Id = serviceModel.id;

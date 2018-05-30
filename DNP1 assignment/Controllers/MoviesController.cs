@@ -9,7 +9,6 @@ using DNP1_assignment.Models;
 
 namespace DNP1_assignment.Controllers
 {
-    [Route("admin/[controller]/[action]")]
     public class MoviesController : Controller
     {
         private readonly VIACinemaContext _context;
@@ -54,7 +53,7 @@ namespace DNP1_assignment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,Release_date,Adult,Description,Origin,Poster_path")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +85,7 @@ namespace DNP1_assignment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Release_date,Adult,Description,Origin,Poster_path")] Movie movie)
         {
             if (id != movie.Id)
             {
