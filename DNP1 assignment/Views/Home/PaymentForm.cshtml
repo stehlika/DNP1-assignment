@@ -1,0 +1,28 @@
+﻿@model DNP1_assignment.Models.Forms.BookingForm
+@{
+    ViewData["Title"] = "PaymentForm";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+@if (!@Model.PaymentCheck)
+{
+    <h2>Your booking was fucking disasterous</h2>
+    <input action="action" onclick="window.history.go(-1); return false;" type="button" value="Back to order" />
+}
+else
+{
+    <h2> Order was successful</h2>
+
+
+    <h4>recap:</h4>
+    <p>@Model.checkboxes</p>
+    <p>@Model.Name </p>
+    <p>@Model.CardNumber</p>
+    <p>@Model.CardExpirationYear</p>
+    <p>@Model.CardExpirationMonth</p>
+    <p>@Model.Cvs</p>   
+
+    }
+
+
+

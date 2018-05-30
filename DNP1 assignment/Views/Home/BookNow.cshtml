@@ -55,40 +55,57 @@
         Seat[,] seats = new Seat[GetMaxXY()[0], GetMaxXY()[1]];
         FillSeats(seats);
     }
-    
-    <h4><button type="button"><a asp-action="Index">Back to List</a>
-        </button><button type="button">Book now</button></h4>
+
+    <h4>
+        <button type="button"><a asp-action="Index">Back to List</a></button>
+    </h4>
     <h1 align="center">Select your booking for available seats</h1>
-    <table class="table">
-        <tbody>
-            @for (int i = 0; i < GetMaxXY()[1]; i++)
-            {
+    <form method="post" asp-action="PaymentForm">
+        <table class="table">
+            <tbody>
+                @for (int i = 0; i < GetMaxXY()[1]; i++)
+                {
 
-                <tr>
-                    @for (int j = 0; j < GetMaxXY()[0]; j++)
-                    {
-                        if (seats[x, y].Payment == null)
+                    <tr>
+                        @for (int j = 0; j < GetMaxXY()[0]; j++)
                         {
-                            <td>
-                                <input type="checkbox" name="@i/@j" />
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                <input type="checkbox" name="@i/@j" disabled="disabled" />
-                            </td>
+                            if (seats[x, y].Payment == null)
+                            {
+                                <td>
+                                    <input type="checkbox" name="checkedItems" value="@i/@j" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <input type="checkbox" name="checkedItems" value="@i/@j" disabled="disabled" />
+                                </td>
+
+                            }
 
                         }
 
-                    }
+                    </tr>
 
-                </tr>
+                }
+            </tbody>
+        </table>
+        <h1 align="center">Screen</h1>
 
-            }
-        </tbody>
-    </table>
-    <h1 align="center">Screen</h1>
+
+        Name:<br />
+        <input type="text" name="firstName" /><br />
+        Card Number:<br />
+        <input type="text" name="cardNumber" /><br />
+        Expiration Month :<br />
+        <input type="text" name="expMonth" /><br />
+        Expiration Year :<br />
+        <input type="text" name="expYear" /><br />
+        Cvs : <br />
+        <input type="text" name="cvs" /><br />
+        <h4><button type="submit">Book now</button></h4>
+    </form>
+    
 
 
 
