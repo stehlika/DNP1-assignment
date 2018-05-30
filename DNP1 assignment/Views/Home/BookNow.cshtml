@@ -72,19 +72,22 @@
                     <tr>
                         @for (int j = 0; j < GetMaxXY()[0]+1; j++)
                             {
-                            if (seats[i, j].Payment == null)
+                            <h1>@seats[i, j].Payment</h1>
+                            //the selection doesnt work, we have no idea
+                            if (seats[i, j].Payment !=null)
                             {
                                 <td>
-                                    <input type="checkbox" name="checkedItems" value="@i/@j" />
+                                    <input type="checkbox" name="checkedItems" value="@i/@j"  disabled="disabled"/>
                                 </td>
                             }
                             else
                             {
                                 <td>
-                                    <input type="checkbox" name="checkedItems" value="@i/@j" disabled="disabled" />
+                                    <input type="checkbox" name="checkedItems" value="@i/@j" disabled="disabled"/>
                                 </td>
-
                             }
+
+
 
                         }
 

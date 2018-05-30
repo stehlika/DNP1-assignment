@@ -76,8 +76,19 @@ namespace DNP1_assignment.Controllers
 
             //tuto je vysledok z toho
             bool correctPayment = isValid.Result;
+            foreach (String item in bookingForm.checkboxes)
+            {
+              
+                _context.Seats.Where(S => S.XPosition == Int16.Parse(""+item[0]) &&
+                S.YPosition == Int16.Parse("" + item[2])).First().Payment = new Payment();
+
+               // seat.Payment = new Payment();
+               
+                //_context.Seats.Update(seat);
+               
+            }
+            _context.SaveChangesAsync();
             bookingForm.PaymentCheck = correctPayment;
-            _context.Update(_context.Seats.Where(S => S.Performance.Id == movieClicked));
             //ServiceReference1.Service1Client paymentService = new ServiceReference1.Service1Client();*/
             return View(bookingForm);
         }
