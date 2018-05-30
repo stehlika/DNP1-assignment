@@ -5,50 +5,151 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DNP1_assignment.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DNP1_assignment.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            PaymentService.PaymentClient paymentClient = new PaymentService.PaymentClient();
+            private readonly VIACinemaContext _context;
 
-
-            Task<bool> isValid = paymentClient.ValidateCardAsync(new PaymentService.Card
+            public HomeController(VIACinemaContext context)
             {
-                CardExpirationMonth = 12,
-                CardExpirationYear = 2019,
-                CardNumber = "1235123454326543",
-                Name = "niekto",
-                Cvs = "323"
-            });
+                _context = context;
+            }
 
-            //this is result
-            bool correctPayment = isValid.Result;
-            //ServiceReference1.Service1Client paymentService = new ServiceReference1.Service1Client();
+            // GET: Movies
+            public async Task<IActionResult> Index()
+            {
+                return View(await _context.Movies.ToListAsync());
+            }
 
-             ViewData["Message"] = "smt" + correctPayment;
-            return View();
+            // GET: Movies/Details/5
+            public async Task<IActionResult> Details(int? id)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var movie = await _context.Movies
+                    .SingleOrDefaultAsync(m => m.Id == id);
+                if (movie == null)
+                {
+                    return NotFound();
+                }
+
+                return View(movie);
+            }
+
+            // GET: Movies/Create
+            public IActionResult Create()
+            {
+                return View();
+            }
+
+            // POST: Movies/Create
+            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+            // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(movie);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(movie);
+            }
+
+            // GET: Movies/Edit/5
+            public async Task<IActionResult> BookNow(int? id) 
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var movie = await _context.Movies.SingleOrDefaultAsync(m => m.Id == id);
+                if (movie == null)
+                {
+                    return NotFound();
+                }
+                //return View(movie);
+                return View(await _context.Seats.Where(S =>  S.Performance.Id==id).ToListAsync());
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
+            // POST: Movies/Edit/5
+            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+            // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ReleaseDate,Length,MinimalAge,Description,Origin")] Movie movie)
+            {
+                if (id != movie.Id)
+                {
+                    return NotFound();
+                }
 
-            return View();
-        }
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(movie);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!MovieExists(movie.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(movie);
+            }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+            // GET: Movies/Delete/5
+            public async Task<IActionResult> Delete(int? id)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            return View();
-        }
+                var movie = await _context.Movies
+                    .SingleOrDefaultAsync(m => m.Id == id);
+                if (movie == null)
+                {
+                    return NotFound();
+                }
 
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+                return View(movie);
+            }
+
+            // POST: Movies/Delete/5
+            [HttpPost, ActionName("Delete")]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> DeleteConfirmed(int id)
+            {
+                var movie = await _context.Movies.SingleOrDefaultAsync(m => m.Id == id);
+                _context.Movies.Remove(movie);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            private bool MovieExists(int id)
+            {
+                return _context.Movies.Any(e => e.Id == id);
+            }
+           
     }
+
 }

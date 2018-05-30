@@ -9,6 +9,7 @@ using DNP1_assignment.Models;
 
 namespace DNP1_assignment.Controllers
 {
+    [Route("admin/[controller]/[action]")]
     public class PerformancesController : Controller
     {
         private readonly VIACinemaContext _context;
