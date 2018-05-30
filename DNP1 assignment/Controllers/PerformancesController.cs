@@ -58,6 +58,7 @@ namespace DNP1_assignment.Controllers
         {
             if (ModelState.IsValid)
             {
+                performance.Hall = _context.Halls.Where(S => S.Name.Equals("halltest")).FirstOrDefault();
                 _context.Add(performance);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -20,6 +20,7 @@ namespace DNP1_assignment.Models
         }
         
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Cinema> Cinemas { get; set; }
         public DbSet<Hall> Halls { get; set; }
         public DbSet<Payment> Payments { get; set; }

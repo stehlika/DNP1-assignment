@@ -36,7 +36,7 @@
                     @Html.DisplayNameFor(model => model.Origin)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Poster_path)
+                    Image
                 </th>
             <th></th>
         </tr>
@@ -60,7 +60,7 @@
                 @Html.DisplayFor(modelItem => item.Origin)
             </td>
             <td>
-                <img src="@item.Poster_path" />;
+                <img src="@item.Poster_path"  height="42" width="42" />;
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

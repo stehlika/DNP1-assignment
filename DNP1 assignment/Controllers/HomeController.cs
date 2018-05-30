@@ -15,6 +15,7 @@ namespace DNP1_assignment.Controllers
 {
     public class HomeController : Controller
     {
+            private int movieClicked;
             private readonly VIACinemaContext _context;
 
             public HomeController(VIACinemaContext context)
@@ -41,7 +42,8 @@ namespace DNP1_assignment.Controllers
                 {
                     return NotFound();
                 }
-                //return View(movie);
+            //return View(movie);
+                movieClicked =(int) id;
                 return View(await _context.Seats.Where(S =>  S.Performance.Id==id).ToListAsync());
             }
         
@@ -75,6 +77,7 @@ namespace DNP1_assignment.Controllers
             //tuto je vysledok z toho
             bool correctPayment = isValid.Result;
             bookingForm.PaymentCheck = correctPayment;
+            _context.Update(_context.Seats.Where(S => S.Performance.Id == movieClicked));
             //ServiceReference1.Service1Client paymentService = new ServiceReference1.Service1Client();*/
             return View(bookingForm);
         }
