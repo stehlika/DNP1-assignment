@@ -9,6 +9,7 @@ using DNP1_assignment.Models;
 
 namespace DNP1_assignment.Controllers
 {
+    [Route("admin/[controller]/[action]")]
     public class MoviesController : Controller
     {
         private readonly VIACinemaContext _context;
@@ -21,6 +22,20 @@ namespace DNP1_assignment.Controllers
         // GET: Movies
         public async Task<IActionResult> Index()
         {
+            
+            if (Request.Method == "POST")
+            {
+                var collection = Request.Form;
+                String text = collection["theMovie"];
+                MovieService.MovieClient movieClient = new MovieService.MovieClient();
+                Task<MovieService.MovieServiceModel> movie = movieClient.GetMovieAsync(text);
+                MovieService.MovieServiceModel movieResult = movie.Result;
+
+                _context.Movies.Add(new Movie(movieResult));
+                _context.SaveChanges();
+            }
+            
+
             return View(await _context.Movies.ToListAsync());
         }
 

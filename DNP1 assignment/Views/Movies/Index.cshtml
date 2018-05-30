@@ -9,6 +9,14 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<p>
+    <form method="post" asp-action="Index">
+        Get the movie from movie database :<br />
+        <input type="text" name="theMovie" /><br />
+        <button type="submit">Create immediately</button>
+    </form>
+
+</p>
 <table class="table">
     <thead>
         <tr>
